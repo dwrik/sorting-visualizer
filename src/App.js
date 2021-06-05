@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react"
+import NavBar from "./components/Navbar"
+import Array from "./components/Array"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css"
 
-function App() {
+const ALGORITHMS = ["Bubble Sort", "Merge Sort", "Quick Sort", "Selection Sort"]
+const DEFAULT_ARRAY_SIZE = 50
+const MAX_ARRAY_VALUE = 80
+const MIN_ARRAY_VALUE = 2
+
+const App = () => {
+
+  const [size, setSize] = useState(DEFAULT_ARRAY_SIZE)
+  const [algorithm, setAlgorithm] = useState("Algorithm")
+  const [array, setArray] = useState([])
+
+  useEffect(() => {
+    setArray(generateRandomArray(size))
+  }, [size])
+
+  const changeArraySize = (value = size) => {
+    if (value === size) setArray(generateRandomArray(size))
+    else setSize(value)
+  }
+
+  const changeAlgorithm = (algorithm) => {
+    setAlgorithm(algorithm)
+  }
+
+  const generateRandomArray = (size) => {
+    const array = []
+    for (let i = 0; i < size; i++) {
+      array.push(
+        Math.floor(Math.random() * (MAX_ARRAY_VALUE - 1)) + MIN_ARRAY_VALUE
+      )
+    }
+    return array
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NavBar
+        rangeSliderValue={size}
+        changeArraySize={changeArraySize}
+        algorithm={algorithm}
+        algorithms={ALGORITHMS}
+        changeAlgorithm={changeAlgorithm}
+      />
+      <Array array={array} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
