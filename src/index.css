@@ -8,5 +8,5 @@
 
 .bar {
   border: 1px solid white;
-  background-color: darkslategray;
+  transition: height 100ms;
 }

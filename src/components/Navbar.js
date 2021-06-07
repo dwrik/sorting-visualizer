@@ -10,6 +10,7 @@ const NavBar = ({
   algorithm,
   algorithms,
   changeAlgorithm,
+  sortHandler,
 }) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -26,7 +27,12 @@ const NavBar = ({
             algorithms={algorithms}
             changeAlgorithm={changeAlgorithm}
           />
-          <Button variant="light" type="submit" className="mx-2">
+          <Button
+            variant="light"
+            type="submit"
+            className="mx-2"
+            onClick={sortHandler}
+          >
             Sort!
           </Button>
         </Nav>
