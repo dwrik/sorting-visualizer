@@ -7,7 +7,7 @@ const Array = ({ array }) => {
     <Container >
       <Row className="flex-nowrap justify-content-center">
         {array.map((value, index) => {
-          return <Bar key={index} height={value} />
+          return <Bar key={index} height={value} size={array.length} />
         })}
       </Row>
     </Container>

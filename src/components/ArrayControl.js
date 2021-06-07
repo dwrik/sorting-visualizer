@@ -10,7 +10,7 @@ const ArrayControl = ({ rangeSliderValue, changeArraySize }) => {
       <RangeSlider
         variant="secondary"
         tooltip="off"
-        min={50}
+        min={5}
         max={100}
         value={rangeSliderValue}
         onChange={(event) => {
