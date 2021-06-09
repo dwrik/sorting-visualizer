@@ -21,6 +21,10 @@ const _getColor = (state) => {
       return BAR_COLORS.compared
     case BAR_STATE.swapped:
       return BAR_COLORS.swapped
+    case BAR_STATE.sorted:
+      return BAR_COLORS.sorted
+    case BAR_STATE.finished:
+      return BAR_COLORS.finished
     default:
       return "aliceblue"
   }
