@@ -1,7 +1,8 @@
 import Button from "react-bootstrap/Button"
 import RangeSlider from "react-bootstrap-range-slider"
+import { APP_STATE } from "../App"
 
-const ArrayControl = ({ rangeSliderValue, changeArraySize }) => {
+const ArrayControl = ({ rangeSliderValue, changeArraySize, state }) => {
   return (
     <>
       <span style={{ color: "white" }} className="my-2 mx-4">
@@ -13,6 +14,7 @@ const ArrayControl = ({ rangeSliderValue, changeArraySize }) => {
         min={5}
         max={100}
         value={rangeSliderValue}
+        disabled={state === APP_STATE.sorting}
         onChange={(event) => {
           changeArraySize(event.target.value)
         }}
@@ -20,6 +22,7 @@ const ArrayControl = ({ rangeSliderValue, changeArraySize }) => {
       <Button
         variant="outline-light"
         className="mx-2"
+        disabled={state === APP_STATE.sorting}
         onClick={() => changeArraySize()}
       >
         Generate New Array

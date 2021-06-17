@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import NavBar from "./components/Navbar"
 import Array from "./components/Array"
-import bubbleSort from "./algorithms/BubbleSort"
+import sort from "./SortingController"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css"
 
@@ -12,38 +12,50 @@ export const BAR_STATE = {
   sorted: 3,
   finished: 4,
 }
+
 export const BAR_COLORS = {
   normal: "darkslategrey",
-  compared: "red",
   swapped: "mediumspringgreen",
-  sorted: "pink",
   finished: "palegreen",
+  compared: "red",
+  sorted: "thistle",
+}
+
+export const APP_STATE = {
+  default: 0,
+  sorting: 1,
 }
 
 const ALGORITHMS = ["Bubble Sort", "Merge Sort", "Quick Sort", "Selection Sort"]
+export const ANIMATION_SPEED = 10
 const DEFAULT_ARRAY_SIZE = 50
 const MAX_ARRAY_VALUE = 80
 const MIN_ARRAY_VALUE = 2
-const ANIMATION_SPEED = 10
 
 const App = () => {
+  // App state
   const [size, setSize] = useState(DEFAULT_ARRAY_SIZE)
   const [algorithm, setAlgorithm] = useState("Algorithm")
+  const [state, setState] = useState(APP_STATE.default)
   const [array, setArray] = useState([])
 
+  // hook to regenerate array on size change
   useEffect(() => {
     setArray(generateRandomArray(size))
   }, [size])
 
+  // change array or both size & array
   const changeArraySize = (value = size) => {
     if (value === size) setArray(generateRandomArray(size))
     else setSize(value)
   }
 
+  // change sorting algorithm
   const changeAlgorithm = (algorithm) => {
     setAlgorithm(algorithm)
   }
 
+  // random integers b/w 2 and 80
   const generateRandomArray = (size) => {
     const array = []
     for (let i = 0; i < size; i++) {
@@ -56,70 +68,9 @@ const App = () => {
     return array
   }
 
+  // executes on clicking sort button
   const sortHandler = () => {
-    const { sortedIdx, comparisons: animations } = bubbleSort(array)
-    let i = 0
-    animations.forEach((pair, index) => {
-      const currentArray = array.slice()
-      if (index % 2 === 0) {
-        // change bar state for comparison
-        setTimeout(() => {
-          currentArray[pair[0]].state = BAR_STATE.compared
-          currentArray[pair[1]].state = BAR_STATE.compared
-          setArray(currentArray)
-        }, index * ANIMATION_SPEED)
-        setTimeout(() => {
-          currentArray[pair[0]].state = BAR_STATE.normal
-          currentArray[pair[1]].state = BAR_STATE.normal
-          setArray(currentArray)
-        }, index * ANIMATION_SPEED)
-      } else {
-        // swap state and values if different index
-        if (pair[0] !== pair[1]) {
-          setTimeout(() => {
-            currentArray[pair[0]].state = BAR_STATE.swapped
-            currentArray[pair[1]].state = BAR_STATE.swapped
-            setArray(currentArray)
-          }, index * ANIMATION_SPEED)
-          setTimeout(() => {
-            const swap = currentArray[pair[0]].value
-            currentArray[pair[0]].value = currentArray[pair[1]].value
-            currentArray[pair[1]].value = swap
-            setArray(currentArray)
-          }, index * ANIMATION_SPEED)
-          setTimeout(() => {
-            currentArray[pair[0]].state = BAR_STATE.normal
-            currentArray[pair[1]].state = BAR_STATE.normal
-            setArray(currentArray)
-          }, index * ANIMATION_SPEED)
-        }
-
-        // if sorted index, change bar state
-        if (index === sortedIdx[i]) {
-          i = i + 1
-          setTimeout(() => {
-            currentArray[pair[1]].state = BAR_STATE.sorted
-            setArray(currentArray)
-          }, index * ANIMATION_SPEED)
-        }
-
-        // flash array to indicate sorting finished
-        if (index === animations.length - 1) {
-          setTimeout(() => {
-            const sortedArray = array.map((bar) => {
-              return { state: BAR_STATE.finished, value: bar.value }
-            })
-            setArray(sortedArray)
-            setTimeout(() => {
-              const normalArray = array.map((bar) => {
-                return { state: BAR_STATE.sorted, value: bar.value }
-              })
-              setArray(normalArray)
-            }, 2000)
-          }, index * ANIMATION_SPEED)
-        }
-      }
-    })
+    sort(algorithm, array, setArray, setState)
   }
 
   return (
@@ -131,6 +82,7 @@ const App = () => {
         algorithms={ALGORITHMS}
         changeAlgorithm={changeAlgorithm}
         sortHandler={sortHandler}
+        state={state}
       />
       <Array array={array} />
     </div>
