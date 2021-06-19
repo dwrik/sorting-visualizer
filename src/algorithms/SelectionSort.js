@@ -8,7 +8,7 @@ import {
 const selectionSort = (originalArray) => {
   const animations = []
   const sortedIdx = []
-  const array = JSON.parse(JSON.stringify(originalArray)) // deep clone array
+  const array = originalArray.slice()
   for (let i = 0; i < array.length - 1; i++) {
     let min = i
     for (let j = i + 1; j < array.length; j++) {
@@ -17,9 +17,9 @@ const selectionSort = (originalArray) => {
     }
     animations.push([i, min, 1])
     sortedIdx.push(animations.length - 1)
-    const swap = array[i].value
-    array[i].value = array[min].value
-    array[min].value = swap
+    const swap = array[i]
+    array[i] = array[min]
+    array[min] = swap
   }
   return { animations, sortedIdx }
 }
