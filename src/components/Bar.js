@@ -31,12 +31,12 @@ const _getColor = (state) => {
 }
 
 const _getWidth = (size) => {
-  if (size < 15) return "48px"
-  else if (size < 30) return "30px"
-  else if (size < 45) return "20px"
-  else if (size < 60) return "15px"
-  else if (size < 75) return "12px"
-  else if (size < 90) return "10px"
+  if (size < 15) return "25px"
+  else if (size < 30) return "20px"
+  else if (size < 45) return "15px"
+  else if (size < 60) return "12px"
+  else if (size < 75) return "10px"
+  else if (size < 90) return "9px"
   else return "8px"
 }
 
