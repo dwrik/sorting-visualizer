@@ -26,8 +26,10 @@ export const APP_STATE = {
   sorting: 1,
 }
 
-const ALGORITHMS = ["Bubble Sort", "Merge Sort", "Quick Sort", "Selection Sort"]
 export const ANIMATION_SPEED = 10
+export const ARRAY_FLASH_SPEED = 1000
+
+const ALGORITHMS = ["Bubble Sort", "Merge Sort", "Quick Sort", "Selection Sort"]
 const DEFAULT_ARRAY_SIZE = 50
 const MAX_ARRAY_VALUE = 80
 const MIN_ARRAY_VALUE = 2
@@ -55,7 +57,7 @@ const App = () => {
     setAlgorithm(algorithm)
   }
 
-  // random integers b/w 2 and 80
+  // random integers b/w [MAX_ARRAY_VALUE, MIN_ARRAY_VALUE]
   const generateRandomArray = (size) => {
     const array = []
     for (let i = 0; i < size; i++) {
@@ -68,7 +70,7 @@ const App = () => {
     return array
   }
 
-  // executes on clicking sort button
+  // sort button handler
   const sortHandler = () => {
     sort(algorithm, array, setArray, setState)
   }
