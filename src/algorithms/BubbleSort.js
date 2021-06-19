@@ -8,7 +8,7 @@ import {
 const bubbleSort = (originalArray) => {
   const animations = []
   const sortedIdx = []
-  const array = JSON.parse(JSON.stringify(originalArray)) // deep clone array
+  const array = originalArray.slice()
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length - i - 1; j++) {
       animations.push([j, j + 1])
