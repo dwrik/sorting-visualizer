@@ -1,5 +1,6 @@
 import bubbleSortHandler from "./algorithms/BubbleSort"
 import selectionSortHandler from "./algorithms/SelectionSort"
+import mergeSortHandler from "./algorithms/MergeSort"
 
 const sort = (algorithm, array, setArray, setState) => {
   switch (algorithm) {
@@ -8,6 +9,7 @@ const sort = (algorithm, array, setArray, setState) => {
       break
 
     case "Merge Sort":
+      mergeSortHandler(array, setArray, setState)
       break
 
     case "Quick Sort":
