@@ -1,22 +1,27 @@
-import bubbleSortHandler from "./algorithms/BubbleSort"
-import selectionSortHandler from "./algorithms/SelectionSort"
-import mergeSortHandler from "./algorithms/MergeSort"
+import animateBubbleSort from "./algorithms/BubbleSort"
+import animateSelectionSort from "./algorithms/SelectionSort"
+import animateMergeSort from "./algorithms/MergeSort"
+
+export const ANIMATION_TYPE = {
+  comparison: 0,
+  swap: 1,
+}
 
 const sort = (algorithm, array, setArray, setState) => {
   switch (algorithm) {
     case "Bubble Sort":
-      bubbleSortHandler(array, setArray, setState)
+      animateBubbleSort(array, setArray, setState)
       break
 
     case "Merge Sort":
-      mergeSortHandler(array, setArray, setState)
+      animateMergeSort(array, setArray, setState)
       break
 
     case "Quick Sort":
       break
 
     case "Selection Sort":
-      selectionSortHandler(array, setArray, setState)
+      animateSelectionSort(array, setArray, setState)
       break
 
     default:
