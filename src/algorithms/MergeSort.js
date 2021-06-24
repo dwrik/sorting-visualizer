@@ -1,7 +1,7 @@
 import { BAR_STATE, APP_STATE, ANIMATION_SPEED, ARRAY_FLASH_SPEED } from "../App"
 import { ANIMATION_TYPE } from "../SortingController"
 
-const merge = (originalArray, auxiliaryArray, start, mid, end, animations, sortedIndex) => {
+const merge = (originalArray, auxiliaryArray, start, end, mid, animations, sortedIndex) => {
   let k = start
   let i = start
   let j = mid + 1
@@ -55,13 +55,17 @@ const animateMergeSort = (array, setArray, setState) => {
   animations.forEach((animation, index) => {
     const currentArray = array.slice()
 
+    // comparison animation
     if (animation[2] === ANIMATION_TYPE.comparison) {
       setTimeout(() => {
         currentArray[animation[0]].state = BAR_STATE.compared
         currentArray[animation[1]].state = BAR_STATE.compared
         setArray(currentArray)
       }, index * ANIMATION_SPEED)
-    } else {
+    }
+    
+    // swap animation
+    if (animation[2] === ANIMATION_TYPE.swap) {
       setTimeout(() => {
         currentArray[animation[0]].state = BAR_STATE.swapped
         currentArray[animation[1]].state = BAR_STATE.swapped
@@ -84,7 +88,7 @@ const animateMergeSort = (array, setArray, setState) => {
       setArray(currentArray)
     }, (index + 1) * ANIMATION_SPEED)
 
-    // if element at index is sorted
+    // if animation sorts a bar
     if (index === sortedIndex[idx]) {
       idx++
       setTimeout(() => {
@@ -96,16 +100,16 @@ const animateMergeSort = (array, setArray, setState) => {
     // flash array to indicate sorting finished
     if (index === animations.length - 1) {
       setTimeout(() => { // change state to sorted
-        const sortedArray = array.map((bar) => {
+        const finishedArray = array.map((bar) => {
           return { state: BAR_STATE.finished, value: bar.value }
         })
-        setArray(sortedArray)
+        setArray(finishedArray)
         setTimeout(() => { // change state to finished
-          const finishedArray = array.map((bar) => {
+          const sortedArray = array.map((bar) => {
             return { state: BAR_STATE.sorted, value: bar.value }
           })
-          setArray(finishedArray)
-          setState(APP_STATE.default) // reset App state for enabling controls
+          setArray(sortedArray)
+          setState(APP_STATE.default) // reset app state for enabling controls
         }, ARRAY_FLASH_SPEED)
       }, (index + 1) * ANIMATION_SPEED)
     }
