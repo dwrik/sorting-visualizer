@@ -37,26 +37,28 @@ const animateBubbleSort = (array, setArray, setState) => {
   animations.forEach((animation, index) => {
     const currentArray = array.slice()
 
+    // comparison animation
     if (animation[2] === ANIMATION_TYPE.comparison) {
       setTimeout(() => {
         currentArray[animation[0]].state = BAR_STATE.compared
         currentArray[animation[1]].state = BAR_STATE.compared
         setArray(currentArray)
       }, index * ANIMATION_SPEED)
-    } else {
-      if (animation[0] !== animation[1]) { // swap only if different index
-        setTimeout(() => {
-          currentArray[animation[0]].state = BAR_STATE.swapped
-          currentArray[animation[1]].state = BAR_STATE.swapped
-          setArray(currentArray)
-        }, index * ANIMATION_SPEED)
-        setTimeout(() => {
-          const swap = currentArray[animation[0]].value
-          currentArray[animation[0]].value = currentArray[animation[1]].value
-          currentArray[animation[1]].value = swap
-          setArray(currentArray)
-        }, index * ANIMATION_SPEED)
-      }
+    }
+
+    // swap animation only if different index
+    if (animation[2] === ANIMATION_TYPE.swap && animation[0] !== animation[1]) {
+      setTimeout(() => {
+        currentArray[animation[0]].state = BAR_STATE.swapped
+        currentArray[animation[1]].state = BAR_STATE.swapped
+        setArray(currentArray)
+      }, index * ANIMATION_SPEED)
+      setTimeout(() => {
+        const swap = currentArray[animation[0]].value
+        currentArray[animation[0]].value = currentArray[animation[1]].value
+        currentArray[animation[1]].value = swap
+        setArray(currentArray)
+      }, index * ANIMATION_SPEED)
     }
 
     // revert state
@@ -87,7 +89,7 @@ const animateBubbleSort = (array, setArray, setState) => {
             return { state: BAR_STATE.sorted, value: bar.value }
           })
           setArray(sortedArray)
-          setState(APP_STATE.default) // reset App state for enabling controls
+          setState(APP_STATE.default) // reset app state for enabling controls
         }, ARRAY_FLASH_SPEED)
       }, (index + 1) * ANIMATION_SPEED)
     }

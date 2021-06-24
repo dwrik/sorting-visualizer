@@ -35,13 +35,17 @@ const animateSelectionSort = (array, setArray, setState) => {
   animations.forEach((animation, index) => {
     const currentArray = array.slice()
 
+    // comparison animation
     if (animation[2] === ANIMATION_TYPE.comparison) {
       setTimeout(() => {
         currentArray[animation[0]].state = BAR_STATE.compared
         currentArray[animation[1]].state = BAR_STATE.compared
         setArray(currentArray)
       }, index * ANIMATION_SPEED)
-    } else {
+    }
+
+    // swap animation
+    if (animation[2] === ANIMATION_TYPE.swap) {
       setTimeout(() => {
         currentArray[animation[0]].state = BAR_STATE.swapped
         currentArray[animation[1]].state = BAR_STATE.swapped
@@ -60,7 +64,7 @@ const animateSelectionSort = (array, setArray, setState) => {
       currentArray[animation[0]].state = BAR_STATE.normal
       currentArray[animation[1]].state = BAR_STATE.normal
       setArray(currentArray)
-    }, index * ANIMATION_SPEED)
+    }, (index + 1) * ANIMATION_SPEED)
 
     // if animation sorts a bar
     if (index === sortedIndex[idx]) {
@@ -68,7 +72,7 @@ const animateSelectionSort = (array, setArray, setState) => {
       setTimeout(() => {
         currentArray[animation[0]].state = BAR_STATE.sorted
         setArray(currentArray)
-      }, index * ANIMATION_SPEED)
+      }, (index + 1) * ANIMATION_SPEED)
     }
 
     // flash array to indicate sorting finished
@@ -83,9 +87,9 @@ const animateSelectionSort = (array, setArray, setState) => {
             return { state: BAR_STATE.sorted, value: bar.value }
           })
           setArray(sortedArray)
-          setState(APP_STATE.default) // reset App state for enabling controls
+          setState(APP_STATE.default) // reset app state for enabling controls
         }, ARRAY_FLASH_SPEED)
-      }, index * ANIMATION_SPEED)
+      }, (index + 1) * ANIMATION_SPEED)
     }
   })
 }

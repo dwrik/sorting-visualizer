@@ -1,6 +1,6 @@
+import animateMergeSort from "./algorithms/MergeSort"
 import animateBubbleSort from "./algorithms/BubbleSort"
 import animateSelectionSort from "./algorithms/SelectionSort"
-import animateMergeSort from "./algorithms/MergeSort"
 
 export const ANIMATION_TYPE = {
   comparison: 0,
