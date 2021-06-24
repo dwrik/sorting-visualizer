@@ -23,7 +23,7 @@ const bubbleSort = (originalArray) => {
 }
 
 const animateBubbleSort = (array, setArray, setState) => {
-  // change App state for disabling controls
+  // change app state for disabling controls
   setState(APP_STATE.sorting)
 
   // get sorting animations

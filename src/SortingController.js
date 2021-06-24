@@ -1,4 +1,5 @@
 import animateMergeSort from "./algorithms/MergeSort"
+import animateQuickSort from "./algorithms/QuickSort"
 import animateBubbleSort from "./algorithms/BubbleSort"
 import animateSelectionSort from "./algorithms/SelectionSort"
 
@@ -18,6 +19,7 @@ const sort = (algorithm, array, setArray, setState) => {
       break
 
     case "Quick Sort":
+      animateQuickSort(array, setArray, setState)
       break
 
     case "Selection Sort":
@@ -25,8 +27,7 @@ const sort = (algorithm, array, setArray, setState) => {
       break
 
     default:
-      // warn users
-      alert('Please choose an algorithm before clicking the "Sort" button!')
+      alert('Please choose an algorithm before clicking the "Sort" button!') // warning
   }
 }
 

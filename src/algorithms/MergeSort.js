@@ -30,7 +30,7 @@ const merge = (originalArray, auxiliaryArray, start, end, mid, animations, sorte
 }
 
 const mergeSort = (originalArray, auxiliaryArray, start, end, animations, sortedIndex) => {
-  if (start === end) return
+  if (start >= end) return
   const mid = Math.floor((start + end) / 2)
   mergeSort(auxiliaryArray, originalArray, start, mid, animations, sortedIndex)
   mergeSort(auxiliaryArray, originalArray, mid + 1, end, animations, sortedIndex)
@@ -38,7 +38,7 @@ const mergeSort = (originalArray, auxiliaryArray, start, end, animations, sorted
 }
 
 const animateMergeSort = (array, setArray, setState) => {
-  // change App state for disabling controls
+  // change app state for disabling controls
   setState(APP_STATE.sorting)
 
   // sortedIndex pointer

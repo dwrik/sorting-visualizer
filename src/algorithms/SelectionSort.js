@@ -21,7 +21,7 @@ const selectionSort = (originalArray) => {
 }
 
 const animateSelectionSort = (array, setArray, setState) => {
-  // change App state for disabling controls
+  // change app state for disabling controls
   setState(APP_STATE.sorting)
 
   // get sorting animations
@@ -78,10 +78,10 @@ const animateSelectionSort = (array, setArray, setState) => {
     // flash array to indicate sorting finished
     if (index === animations.length - 1) {
       setTimeout(() => { // change state to finished
-        const finished = array.map((bar) => {
+        const finishedArray = array.map((bar) => {
           return { state: BAR_STATE.finished, value: bar.value }
         })
-        setArray(finished)
+        setArray(finishedArray)
         setTimeout(() => { // change state to sorted
           const sortedArray = array.map((bar) => {
             return { state: BAR_STATE.sorted, value: bar.value }

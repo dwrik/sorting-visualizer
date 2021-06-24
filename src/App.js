@@ -26,7 +26,7 @@ export const APP_STATE = {
   sorting: 1,
 }
 
-export const ANIMATION_SPEED = 10
+export const ANIMATION_SPEED = 20
 export const ARRAY_FLASH_SPEED = 1000
 
 const ALGORITHMS = ["Bubble Sort", "Merge Sort", "Quick Sort", "Selection Sort"]
