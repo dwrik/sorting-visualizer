@@ -6,7 +6,7 @@ const ArrayControl = ({ rangeSliderValue, changeArraySize, state }) => {
   return (
     <>
       <span style={{ color: "white" }} className="my-2 mx-4">
-        Change Array Size
+        Change Array Size & Sorting Speed
       </span>
       <RangeSlider
         variant="secondary"

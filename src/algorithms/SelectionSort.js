@@ -1,4 +1,4 @@
-import { BAR_STATE, APP_STATE, ANIMATION_SPEED, ARRAY_FLASH_SPEED } from "../App"
+import { BAR_STATE, APP_STATE, ARRAY_FLASH_SPEED } from "../App"
 import { ANIMATION_TYPE } from "../SortingController"
 
 const selectionSort = (originalArray) => {
@@ -20,7 +20,7 @@ const selectionSort = (originalArray) => {
   return { animations, sortedIndex }
 }
 
-const animateSelectionSort = (array, setArray, setState) => {
+const animateSelectionSort = (array, setArray, setState, ANIMATION_SPEED) => {
   // change app state for disabling controls
   setState(APP_STATE.sorting)
 
@@ -64,7 +64,7 @@ const animateSelectionSort = (array, setArray, setState) => {
       currentArray[animation[0]].state = BAR_STATE.normal
       currentArray[animation[1]].state = BAR_STATE.normal
       setArray(currentArray)
-    }, (index + 1) * ANIMATION_SPEED)
+    }, index * ANIMATION_SPEED)
 
     // if animation sorts a bar
     if (index === sortedIndex[idx]) {
@@ -72,7 +72,7 @@ const animateSelectionSort = (array, setArray, setState) => {
       setTimeout(() => {
         currentArray[animation[0]].state = BAR_STATE.sorted
         setArray(currentArray)
-      }, (index + 1) * ANIMATION_SPEED)
+      }, index * ANIMATION_SPEED)
     }
 
     // flash array to indicate sorting finished
@@ -89,7 +89,7 @@ const animateSelectionSort = (array, setArray, setState) => {
           setArray(sortedArray)
           setState(APP_STATE.default) // reset app state for enabling controls
         }, ARRAY_FLASH_SPEED)
-      }, (index + 1) * ANIMATION_SPEED)
+      }, index * ANIMATION_SPEED)
     }
   })
 }

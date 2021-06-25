@@ -11,14 +11,16 @@ export const BAR_STATE = {
   swapped: 2,
   sorted: 3,
   finished: 4,
+  pivot: 5,
 }
 
 export const BAR_COLORS = {
-  normal: "darkslategrey",
+  normal: "rgb(53, 62, 72)",
   swapped: "mediumspringgreen",
   finished: "palegreen",
   compared: "red",
   sorted: "thistle",
+  pivot: "yellow",
 }
 
 export const APP_STATE = {
@@ -26,7 +28,6 @@ export const APP_STATE = {
   sorting: 1,
 }
 
-export const ANIMATION_SPEED = 20
 export const ARRAY_FLASH_SPEED = 1000
 
 const ALGORITHMS = ["Bubble Sort", "Merge Sort", "Quick Sort", "Selection Sort"]
@@ -35,15 +36,22 @@ const MAX_ARRAY_VALUE = 80
 const MIN_ARRAY_VALUE = 2
 
 const App = () => {
+  // animation speed calculator
+  const getAnimationSpeed = (size) => {
+    return 3000 / size
+  }
+
   // App state
   const [size, setSize] = useState(DEFAULT_ARRAY_SIZE)
   const [algorithm, setAlgorithm] = useState("Algorithm")
   const [state, setState] = useState(APP_STATE.default)
   const [array, setArray] = useState([])
+  const [ANIMATION_SPEED, setAnimationSpeed] = useState(getAnimationSpeed(DEFAULT_ARRAY_SIZE))
 
   // hook to regenerate array on size change
   useEffect(() => {
     setArray(generateRandomArray(size))
+    setAnimationSpeed(getAnimationSpeed(size))
   }, [size])
 
   // change array or both size & array
@@ -72,7 +80,7 @@ const App = () => {
 
   // sort button handler
   const sortHandler = () => {
-    sort(algorithm, array, setArray, setState)
+    sort(algorithm, array, setArray, setState, ANIMATION_SPEED)
   }
 
   return (

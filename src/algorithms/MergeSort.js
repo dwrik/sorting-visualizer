@@ -1,4 +1,4 @@
-import { BAR_STATE, APP_STATE, ANIMATION_SPEED, ARRAY_FLASH_SPEED } from "../App"
+import { BAR_STATE, APP_STATE, ARRAY_FLASH_SPEED } from "../App"
 import { ANIMATION_TYPE } from "../SortingController"
 
 const merge = (originalArray, auxiliaryArray, start, end, mid, animations, sortedIndex) => {
@@ -37,7 +37,7 @@ const mergeSort = (originalArray, auxiliaryArray, start, end, animations, sorted
   merge(originalArray, auxiliaryArray, start, end, mid, animations, sortedIndex)
 }
 
-const animateMergeSort = (array, setArray, setState) => {
+const animateMergeSort = (array, setArray, setState, ANIMATION_SPEED) => {
   // change app state for disabling controls
   setState(APP_STATE.sorting)
 

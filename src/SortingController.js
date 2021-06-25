@@ -8,22 +8,22 @@ export const ANIMATION_TYPE = {
   swap: 1,
 }
 
-const sort = (algorithm, array, setArray, setState) => {
+const sort = (algorithm, array, setArray, setState, ANIMATION_SPEED) => {
   switch (algorithm) {
     case "Bubble Sort":
-      animateBubbleSort(array, setArray, setState)
+      animateBubbleSort(array, setArray, setState, ANIMATION_SPEED)
       break
 
     case "Merge Sort":
-      animateMergeSort(array, setArray, setState)
+      animateMergeSort(array, setArray, setState, ANIMATION_SPEED)
       break
 
     case "Quick Sort":
-      animateQuickSort(array, setArray, setState)
+      animateQuickSort(array, setArray, setState, ANIMATION_SPEED)
       break
 
     case "Selection Sort":
-      animateSelectionSort(array, setArray, setState)
+      animateSelectionSort(array, setArray, setState, ANIMATION_SPEED)
       break
 
     default:

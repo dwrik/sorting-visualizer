@@ -5,33 +5,29 @@ const Bar = ({ height, state, size }) => {
     <div
       style={{
         height: `${height}vh`,
-        width: `${_getWidth(size)}`,
-        backgroundColor: `${_getColor(state)}`,
+        width: `${getWidth(size)}`,
+        backgroundColor: `${getColor(state)}`,
       }}
       className="bar"
     ></div>
   )
 }
 
-const _getColor = (state) => {
+const getColor = (state) => {
   switch (state) {
-    case BAR_STATE.normal:
-      return BAR_COLORS.normal
-    case BAR_STATE.compared:
-      return BAR_COLORS.compared
-    case BAR_STATE.swapped:
-      return BAR_COLORS.swapped
-    case BAR_STATE.sorted:
-      return BAR_COLORS.sorted
-    case BAR_STATE.finished:
-      return BAR_COLORS.finished
-    default:
-      return "aliceblue"
+    case BAR_STATE.pivot: return BAR_COLORS.pivot
+    case BAR_STATE.normal: return BAR_COLORS.normal
+    case BAR_STATE.compared: return BAR_COLORS.compared
+    case BAR_STATE.finished: return BAR_COLORS.finished
+    case BAR_STATE.swapped: return BAR_COLORS.swapped
+    case BAR_STATE.sorted: return BAR_COLORS.sorted
+    default: return "aliceblue"
   }
 }
 
-const _getWidth = (size) => {
-  if (size < 15) return "25px"
+const getWidth = (size) => {
+  if (size < 8) return "45px"
+  else if (size < 15) return "25px"
   else if (size < 30) return "20px"
   else if (size < 45) return "15px"
   else if (size < 60) return "12px"
