@@ -1,9 +1,4 @@
-import {
-  BAR_STATE,
-  APP_STATE,
-  ANIMATION_SPEED,
-  ARRAY_FLASH_SPEED,
-} from "../App"
+import { BAR_STATE, APP_STATE, ARRAY_FLASH_SPEED } from "../App"
 import { ANIMATION_TYPE } from "../SortingController"
 
 const swap = (array, i, j) => {
@@ -27,18 +22,25 @@ const partition = (originalArray, start, end, animations, sortedIndex) => {
   }
   swap(originalArray, i + 1, k)
   animations.push([i + 1, k, ANIMATION_TYPE.swap])
-//   sortedIndex.push(animations.length - 1)
+  sortedIndex.push(animations.length - 1)
   return i + 1
 }
 
 const quicksort = (originalArray, start, end, animations, sortedIndex) => {
-  if (start >= end) return
+  if (start >= end) {
+    if (start === end) {
+      animations.push([start, end, ANIMATION_TYPE.comparison])
+      animations.push([start, end, ANIMATION_TYPE.swap])
+      sortedIndex.push(animations.length - 1)
+    }
+    return
+  }
   const pivot = partition(originalArray, start, end, animations, sortedIndex)
   quicksort(originalArray, start, pivot - 1, animations, sortedIndex)
   quicksort(originalArray, pivot + 1, end, animations, sortedIndex)
 }
 
-const animateQuickSort = (array, setArray, setState) => {
+const animateQuickSort = (array, setArray, setState, ANIMATION_SPEED) => {
   // change App state for disabling controls
   setState(APP_STATE.sorting)
 
@@ -60,7 +62,7 @@ const animateQuickSort = (array, setArray, setState) => {
     if (animation[2] === ANIMATION_TYPE.comparison) {
       setTimeout(() => {
         currentArray[animation[0]].state = BAR_STATE.compared
-        currentArray[animation[1]].state = BAR_STATE.compared
+        currentArray[animation[1]].state = BAR_STATE.pivot
         setArray(currentArray)
       }, index * ANIMATION_SPEED)
     }
@@ -85,7 +87,7 @@ const animateQuickSort = (array, setArray, setState) => {
       currentArray[animation[0]].state = BAR_STATE.normal
       currentArray[animation[1]].state = BAR_STATE.normal
       setArray(currentArray)
-    }, (index + 1) * ANIMATION_SPEED)
+    }, index * ANIMATION_SPEED)
 
     // if animation sorts a bar
     if (index === sortedIndex[idx]) {
@@ -93,26 +95,24 @@ const animateQuickSort = (array, setArray, setState) => {
       setTimeout(() => {
         currentArray[animation[0]].state = BAR_STATE.sorted
         setArray(currentArray)
-      }, (index + 1) * ANIMATION_SPEED)
+      }, index * ANIMATION_SPEED)
     }
 
     // flash array to indicate sorting finished
     if (index === animations.length - 1) {
-      setTimeout(() => {
-        // change state to finished
+      setTimeout(() => { // change state to finished
         const finishedArray = array.map((bar) => {
           return { state: BAR_STATE.finished, value: bar.value }
         })
         setArray(finishedArray)
-        setTimeout(() => {
-          // change state to sorted
+        setTimeout(() => { // change state to sorted
           const sortedArray = array.map((bar) => {
             return { state: BAR_STATE.sorted, value: bar.value }
           })
           setArray(sortedArray)
           setState(APP_STATE.default) // reset app state for enabling controls
         }, ARRAY_FLASH_SPEED)
-      }, (index + 1) * ANIMATION_SPEED)
+      }, index * ANIMATION_SPEED)
     }
   })
 }
