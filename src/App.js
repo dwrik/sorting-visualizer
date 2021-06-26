@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { GoMarkGithub } from "react-icons/go"
 import NavBar from "./components/Navbar"
 import Array from "./components/Array"
 import sort from "./SortingController"
@@ -16,11 +17,11 @@ export const BAR_STATE = {
 
 export const BAR_COLORS = {
   normal: "darkgrey",
-  swapped: "mediumspringgreen",
+  swapped: "lightgreen",
   finished: "palegreen",
-  compared: "red",
+  compared: "lightsalmon",
   sorted: "thistle",
-  pivot: "yellow",
+  pivot: "khaki",
 }
 
 export const APP_STATE = {
@@ -54,7 +55,6 @@ const App = () => {
     }
     return speedFactor / size
   }
-
 
   // App state
   const [array, setArray] = useState([])
@@ -135,6 +135,11 @@ const App = () => {
         state={state}
       />
       <Array array={array} />
+      <footer className="footer">
+        <a href="https://github.com/dwrik" target="_blank" rel="noreferrer" className="links">
+          <GoMarkGithub /> <span id="username">dwrik</span>
+        </a>
+      </footer>
     </div>
   )
 }
