@@ -16,7 +16,7 @@ const NavBar = ({
 }) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
-      <Navbar.Brand>SortingVisualizer</Navbar.Brand>
+      <Navbar.Brand className="brand-name">SortingVisualizer</Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
         <Nav className="ml-auto">

@@ -31,30 +31,48 @@ export const APP_STATE = {
 
 export const ARRAY_FLASH_SPEED = 1000
 
-const ALGORITHMS = ["Bubble Sort", "Merge Sort", "Quick Sort", "Selection Sort"]
+const ALGORITHMS = ["Merge Sort", "Quick Sort", "Bubble Sort", "Selection Sort"]
 const DEFAULT_ARRAY_SIZE = 50
 const MAX_ARRAY_VALUE = 80
 const MIN_ARRAY_VALUE = 2
 
 const App = () => {
   // animation speed calculator
-  const getAnimationSpeed = (size) => {
-    return 3000 / size
+  const getAnimationSpeed = (size, algorithm) => {
+    let speedFactor = 0
+    switch (algorithm) {
+      case "Merge Sort":
+      case "Quick Sort":
+        speedFactor = 4000
+        break
+      case "Bubble Sort":
+      case "Selection Sort":
+        speedFactor = 2000
+        break
+      default:
+        speedFactor = 1000
+    }
+    return speedFactor / size
   }
+
 
   // App state
   const [array, setArray] = useState([])
   const [size, setSize] = useState(DEFAULT_ARRAY_SIZE)
   const [state, setState] = useState(APP_STATE.default)
-  const [algorithm, setAlgorithm] = useState("Algorithm")
+  const [algorithm, setAlgorithm] = useState(ALGORITHMS[0])
   const [ANIMATION_SPEED, setAnimationSpeed] = useState(
-    getAnimationSpeed(DEFAULT_ARRAY_SIZE)
+    getAnimationSpeed(DEFAULT_ARRAY_SIZE, algorithm)
   )
 
-  // hook to regenerate array on size change
+  // animation speed hook
+  useEffect(() => {
+    setAnimationSpeed(getAnimationSpeed(size, algorithm))
+  }, [size, algorithm])
+
+  // array size hook
   useEffect(() => {
     setArray(generateRandomArray(size))
-    setAnimationSpeed(getAnimationSpeed(size))
   }, [size])
 
   // change array or both size & array
