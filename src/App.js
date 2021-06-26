@@ -15,7 +15,7 @@ export const BAR_STATE = {
 }
 
 export const BAR_COLORS = {
-  normal: "rgb(53, 62, 72)",
+  normal: "darkgrey",
   swapped: "mediumspringgreen",
   finished: "palegreen",
   compared: "red",
@@ -106,7 +106,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div className="main">
       <NavBar
         rangeSliderValue={size}
         changeArraySize={changeArraySize}

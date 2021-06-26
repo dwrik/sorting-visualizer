@@ -6,6 +6,11 @@
   font-size: 16px;
 }
 
+.main {
+  height: 100vh;
+  background-color: whitesmoke;
+}
+
 .bar {
   border: 1px solid white;
 }
