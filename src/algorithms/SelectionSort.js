@@ -87,7 +87,7 @@ const animateSelectionSort = (array, setArray, setState, ANIMATION_SPEED) => {
             return { state: BAR_STATE.sorted, value: bar.value }
           })
           setArray(sortedArray)
-          setState(APP_STATE.default) // reset app state for enabling controls
+          setState(APP_STATE.sorted) // change app state
         }, ARRAY_FLASH_SPEED)
       }, index * ANIMATION_SPEED)
     }

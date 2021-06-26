@@ -26,6 +26,7 @@ export const BAR_COLORS = {
 export const APP_STATE = {
   default: 0,
   sorting: 1,
+  sorted: 2,
 }
 
 export const ARRAY_FLASH_SPEED = 1000
@@ -42,11 +43,13 @@ const App = () => {
   }
 
   // App state
-  const [size, setSize] = useState(DEFAULT_ARRAY_SIZE)
-  const [algorithm, setAlgorithm] = useState("Algorithm")
-  const [state, setState] = useState(APP_STATE.default)
   const [array, setArray] = useState([])
-  const [ANIMATION_SPEED, setAnimationSpeed] = useState(getAnimationSpeed(DEFAULT_ARRAY_SIZE))
+  const [size, setSize] = useState(DEFAULT_ARRAY_SIZE)
+  const [state, setState] = useState(APP_STATE.default)
+  const [algorithm, setAlgorithm] = useState("Algorithm")
+  const [ANIMATION_SPEED, setAnimationSpeed] = useState(
+    getAnimationSpeed(DEFAULT_ARRAY_SIZE)
+  )
 
   // hook to regenerate array on size change
   useEffect(() => {
@@ -56,8 +59,12 @@ const App = () => {
 
   // change array or both size & array
   const changeArraySize = (value = size) => {
-    if (value === size) setArray(generateRandomArray(size))
-    else setSize(value)
+    setState(APP_STATE.default)
+    if (value === size) {
+      setArray(generateRandomArray(size))
+    } else {
+      setSize(value)
+    }
   }
 
   // change sorting algorithm
@@ -78,9 +85,24 @@ const App = () => {
     return array
   }
 
+  // change sorted state to normal
+  const revertSortedState = () => {
+    const stateChangedArray = array.map((bar) => {
+      return {
+        state: BAR_STATE.normal,
+        value: bar.value,
+      }
+    })
+    return stateChangedArray
+  }
+
   // sort button handler
   const sortHandler = () => {
-    sort(algorithm, array, setArray, setState, ANIMATION_SPEED)
+    let currentArray = array
+    if (state === APP_STATE.sorted) {
+      currentArray = revertSortedState()
+    }
+    sort(algorithm, currentArray, setArray, setState, ANIMATION_SPEED)
   }
 
   return (

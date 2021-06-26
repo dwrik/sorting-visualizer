@@ -86,7 +86,7 @@ const animateMergeSort = (array, setArray, setState, ANIMATION_SPEED) => {
       currentArray[animation[0]].state = BAR_STATE.normal
       currentArray[animation[1]].state = BAR_STATE.normal
       setArray(currentArray)
-    }, (index + 1) * ANIMATION_SPEED)
+    }, index * ANIMATION_SPEED)
 
     // if animation sorts a bar
     if (index === sortedIndex[idx]) {
@@ -94,7 +94,7 @@ const animateMergeSort = (array, setArray, setState, ANIMATION_SPEED) => {
       setTimeout(() => {
         currentArray[animation[0]].state = BAR_STATE.sorted
         setArray(currentArray)
-      }, (index + 1) * ANIMATION_SPEED)
+      }, index * ANIMATION_SPEED)
     }
 
     // flash array to indicate sorting finished
@@ -109,9 +109,9 @@ const animateMergeSort = (array, setArray, setState, ANIMATION_SPEED) => {
             return { state: BAR_STATE.sorted, value: bar.value }
           })
           setArray(sortedArray)
-          setState(APP_STATE.default) // reset app state for enabling controls
+          setState(APP_STATE.sorted) // change app state
         }, ARRAY_FLASH_SPEED)
-      }, (index + 1) * ANIMATION_SPEED)
+      }, index * ANIMATION_SPEED)
     }
   })
 }
