@@ -1,3 +1,4 @@
+import animateHeapSort from "./algorithms/HeapSort"
 import animateMergeSort from "./algorithms/MergeSort"
 import animateQuickSort from "./algorithms/QuickSort"
 import animateBubbleSort from "./algorithms/BubbleSort"
@@ -16,6 +17,10 @@ const sort = (algorithm, array, setArray, setState, ANIMATION_SPEED) => {
 
     case "Merge Sort":
       animateMergeSort(array, setArray, setState, ANIMATION_SPEED)
+      break
+
+    case "Heap Sort":
+      animateHeapSort(array, setArray, setState, ANIMATION_SPEED)
       break
 
     case "Quick Sort":
