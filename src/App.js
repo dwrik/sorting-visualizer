@@ -32,7 +32,14 @@ export const APP_STATE = {
 
 export const ARRAY_FLASH_SPEED = 1000
 
-const ALGORITHMS = ["Merge Sort", "Quick Sort", "Bubble Sort", "Selection Sort"]
+const ALGORITHMS = [
+  "Merge Sort",
+  "Heap Sort",
+  "Quick Sort",
+  "Bubble Sort",
+  "Selection Sort",
+]
+
 const DEFAULT_ARRAY_SIZE = 50
 const MAX_ARRAY_VALUE = 80
 const MIN_ARRAY_VALUE = 2
@@ -43,8 +50,11 @@ const App = () => {
     let speedFactor = 0
     switch (algorithm) {
       case "Merge Sort":
-      case "Quick Sort":
         speedFactor = 4000
+        break
+      case "Quick Sort":
+      case "Heap Sort":
+        speedFactor = 3000
         break
       case "Bubble Sort":
       case "Selection Sort":
@@ -136,7 +146,12 @@ const App = () => {
       />
       <Array array={array} />
       <footer className="footer">
-        <a href="https://github.com/dwrik" target="_blank" rel="noreferrer" className="links">
+        <a
+          href="https://github.com/dwrik"
+          target="_blank"
+          rel="noreferrer"
+          className="links"
+        >
           <GoMarkGithub /> <span id="username">dwrik</span>
         </a>
       </footer>
