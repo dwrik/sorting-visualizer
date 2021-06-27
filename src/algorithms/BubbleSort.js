@@ -1,6 +1,12 @@
 import { BAR_STATE, APP_STATE, ARRAY_FLASH_SPEED } from "../App"
 import { ANIMATION_TYPE } from "../SortingController"
 
+const swap = (array, i, j) => {
+  const swap = array[i]
+  array[i] = array[j]
+  array[j] = swap
+}
+
 const bubbleSort = (originalArray) => {
   const animations = [] // stores comparison or swap animations
   const sortedIndex = [] // stores animation indexes to highlight sorted bars
@@ -10,9 +16,7 @@ const bubbleSort = (originalArray) => {
       animations.push([j, j + 1, ANIMATION_TYPE.comparison])
       if (array[j].value > array[j + 1].value) {
         animations.push([j, j + 1, ANIMATION_TYPE.swap])
-        const swap = array[j]
-        array[j] = array[j + 1]
-        array[j + 1] = swap
+        swap(array, j, j + 1)
       }
     }
     sortedIndex.push(animations.length - 1)
