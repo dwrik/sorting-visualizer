@@ -159,6 +159,14 @@ const App = () => {
         >
           <GoMarkGithub /> <span id="username">dwrik</span>
         </a>
+        <a
+          href="https://icons8.com/icon/439i3V9ejb2W/bar-chart"
+          target="_blank"
+          rel="noreferrer"
+          className="links attribution"
+        >
+          Bar Chart icon by Icons8
+        </a>
       </footer>
     </div>
   )
