@@ -48,21 +48,26 @@ const App = () => {
   // animation speed calculator
   const getAnimationSpeed = (size, algorithm) => {
     let speedFactor = 0
+
     switch (algorithm) {
       case "Merge Sort":
         speedFactor = 4000
         break
+
       case "Quick Sort":
       case "Heap Sort":
         speedFactor = 3000
         break
+
       case "Bubble Sort":
       case "Selection Sort":
         speedFactor = 2000
         break
+
       default:
         speedFactor = 1000
     }
+
     return speedFactor / size
   }
 
